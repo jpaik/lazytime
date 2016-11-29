@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    #Redirect to non-WWW
+    RewriteCond %{HTTP_HOST} ^www.example.com$
+    RewriteRule ^(.*) https://example.com/$1  [QSA,L,R=301]
+
+    #if the request is not secure
+    RewriteCond %{HTTPS} off
+    #redirect to the secure version
+    RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
