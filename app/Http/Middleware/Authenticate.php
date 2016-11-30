@@ -25,6 +25,10 @@ class Authenticate
             }
         }
 
+        if(!Auth::user()->email_confirmed){
+          return redirect()->route('confirm_email');
+        }
+
         return $next($request);
     }
 }
