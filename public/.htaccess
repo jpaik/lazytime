@@ -6,8 +6,8 @@
     RewriteEngine On
 
     #Redirect to non-WWW
-    RewriteCond %{HTTP_HOST} ^www.example.com$
-    RewriteRule ^(.*) https://example.com/$1  [QSA,L,R=301]
+    RewriteCond %{HTTP_HOST} ^www.lazyti.me$
+    RewriteRule ^(.*) https://lazyti.me/$1  [QSA,L,R=301]
 
     #if the request is not secure
     RewriteCond %{HTTPS} off
