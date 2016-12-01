@@ -1,0 +1,35 @@
+body {
+    display: table;
+    background: radial-gradient(circle at bottom right, #fff,#24C6DC 20%, #514A9D 90%);
+}
+
+.container {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    padding-bottom: 50px;
+}
+.content {
+    text-align: center;
+    display: inline-block;
+}
+.title {
+    font-weight: $font-weight-thin;
+    color: $text-color-inverse;
+    @include screen('medium'){
+      font-size: 50px;
+    }
+    @include screen('large'){
+      font-size: 96px;
+    }
+}
+.desc{
+  font-weight: $font-weight-regular;
+  color: $text-color-inverse;
+  @include screen('medium'){
+    font-size: 20px;
+  }
+  @include screen('large'){
+    font-size: 28px;
+  }
+}

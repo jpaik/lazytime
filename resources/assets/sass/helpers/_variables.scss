@@ -1,0 +1,26 @@
+/*
+FONTS
+*/
+//Import Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300');
+
+$font-family: 'Lato', sans-serif;
+$font-family-sans-serif: 'Lato', sans-serif;
+$font-weight-thin: 100;
+$font-weight-regular: 300;
+
+$text-color: #111 !default;
+$text-color-inverse: #fff !default;
+$brand-color: #111 !default;
+
+
+/*
+Breakpoints
+*/
+$breakpoints: (
+  'mobile': (max-width: 766px),
+  'tablet': (min-width: 767px),
+  'medium': (min-width: 990px),
+  'large': (min-width: 1365px),
+  'huge': (min-width: 1600px)
+)

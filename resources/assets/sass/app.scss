@@ -1,2 +1,24 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+/*Helpers (Utils): Variables, mixins, and functions*/
+@import "helpers/variables";
+@import "helpers/mixins";
+//@import "helpers/functions";
 
+/*Vendors (Third Party): Bootstrap, jquery, normalize*/
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/*Base (Global): Fonts, Common HTML styling */
+@import "base/base";
+@import "base/fonts";
+
+/*Layouts (Partials): Header, footer, sidebar, navigation*/
+//@import layouts/header;
+//@import layouts/footer;
+//@import layouts/header;
+
+/*Components (Modules): Carousels, Buttons, media*/
+
+/*Pages: Home, settings, contact*/
+@import 'pages/home';
+
+/*Themes: Default, light, dark*/
+//@import 'themes/default';

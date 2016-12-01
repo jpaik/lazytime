@@ -1,0 +1,55 @@
+/*
+Transitions and Transform
+*/
+@mixin transition($arges) {
+    //Args ex: "all ease .3s"
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    transition: $args;
+}
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    transform: $transforms;
+}
+// Rotate
+@mixin rotate($deg) {
+     @include transform(rotate(#{$deg}deg));
+}
+// Scale
+@mixin scale($scale) {
+     @include transform(scale($scale));
+}
+// Translate
+@mixin translate($x, $y) {
+     @include transform(translate($x, $y));
+}
+// Skew
+@mixin skew($x, $y) {
+     @include transform(skew(#{$x}deg, #{$y}deg));
+}
+// Transform Origin
+@mixin transform-origin($origin) {
+    -webkit-transform-origin: $origin;
+    -moz-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    transform-origin: $origin;
+}
+
+/*
+====================================
+Breakpoints
+===================================
+*/
+@mixin screen($name){
+  @if map-has-key($breakpoints, $name){
+    @media #{inspect(map-get($breakpoints, $name))}{
+      @content;
+    }
+  }
+  @else{
+    @warn "No breakpoint: `#{$breakpoint}`. ";
+  }
+}
