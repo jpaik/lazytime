@@ -28,7 +28,7 @@ class UsersController extends Controller
       if(\Auth::user()){
         return redirect()->intended('dashboard');
       }
-      return view('users.create');
+      return view('auth.create');
     }
 
     /**
@@ -139,8 +139,8 @@ class UsersController extends Controller
     }
 
     public function dashboard(){
-        return view('users.dashboard')
-          ->with(array('user'=> \Auth::user(), 'lists'=> List::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get()));
+        return view('users.dashboard');
+          //->with(array('user'=> \Auth::user(), 'lists'=> List::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get()));
     }
 
     public function settings(){

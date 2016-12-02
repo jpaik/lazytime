@@ -78,6 +78,6 @@ class AuthController extends Controller
             return redirect()->route('dashboard')->with('warning', 'Your email is already confirmed');
         }
 
-        return view('auth.confirm', ['user' => $user]);
+        return view('auth.email', ['user' => $user]);
     }
 }
