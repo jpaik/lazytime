@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+  'as' => '/',
+  'uses' => 'AuthController@index'
+]);
 
 /*Authorization of User*/
 Route::get('login', [
