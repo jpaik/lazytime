@@ -9,6 +9,9 @@
       <div class="desc">
         When you're too lazy to do it now, but need to remember later.
       </div>
+      <div class="row">
+        <a href="/register" class="btn btn-primary">Register</a>
+      </div>
     </div>
   </div>
 </div>
