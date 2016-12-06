@@ -95,6 +95,23 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'email' => [
+            'required' => 'Please enter an email address',
+            'email' => 'Please enter a valid email address',
+            'exists' => 'Email address was not found'
+        ],
+        'first_name' => [
+          'required' => 'Please enter your first name'
+        ],
+        'last_name' => [
+          'required' => 'Please enter your last name'
+        ],
+        'password' => [
+          'required' => 'Please enter a password'
+        ],
+        'password_confirmation' => [
+          'required' => 'Please confirm your password'
+        ]
     ],
 
     /*
