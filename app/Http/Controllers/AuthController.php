@@ -9,7 +9,10 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('index');
+        if (\Auth::user()) {
+          return redirect()->route('dashboard');
+        }
+        return view('welcome');
     }
 
     public function login()
@@ -77,7 +80,7 @@ class AuthController extends Controller
         if ($user->email_confirmed) {
             return redirect()->route('dashboard')->with('warning', 'Your email is already confirmed');
         }
-
+        
         return view('auth.email', ['user' => $user]);
     }
 }

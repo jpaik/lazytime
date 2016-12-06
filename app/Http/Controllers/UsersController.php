@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -139,12 +140,12 @@ class UsersController extends Controller
     }
 
     public function dashboard(){
-        return view('users.dashboard');
-          //->with(array('user'=> \Auth::user(), 'lists'=> List::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get()));
+        return view('users.dashboard')
+          ->with(['user'=> \Auth::user()]); //, 'lists'=> List::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get()
     }
 
     public function settings(){
      return view('users.settings')
-       ->with(array('user'=> \Auth::user()));
+       ->with(['user'=> \Auth::user()]);
    }
 }
