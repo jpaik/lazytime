@@ -17,9 +17,12 @@
 //@import layouts/header;
 
 /*Components (Modules): Carousels, Buttons, media*/
+@import "components/panel";
+@import "components/input";
 
 /*Pages: Home, settings, contact*/
 @import 'pages/home';
+@import 'pages/dashboard';
 
 /*Themes: Default, light, dark*/
 //@import 'themes/default';

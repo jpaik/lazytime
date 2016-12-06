@@ -8,15 +8,18 @@ $font-family-sans-serif: 'Roboto', sans-serif;
 $headings-font-family: 'Lato', sans-serif;
 $font-weight-thin: 100;
 $font-weight-regular: 300;
+$font-size-base: 16px;
 
 $text-color: #111 !default;
 $text-color-inverse: #fff !default;
 $brand-color: #111 !default;
 
+$brand-primary: #514a9d;
 
 /*
 Breakpoints
 */
+$screen-lg: 1365px;
 $breakpoints: (
   'mobile': (max-width: 766px),
   'tablet': (min-width: 767px),

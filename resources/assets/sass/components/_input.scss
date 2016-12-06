@@ -1,0 +1,108 @@
+.input {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin: 0;
+	width: 100%;
+	vertical-align: top;
+  font-size: $font-size-large;
+
+  .input__field {
+  	position: relative;
+  	display: block;
+  	float: right;
+  	padding: 0.8em;
+  	border: none;
+  	border-radius: 0;
+  	-webkit-appearance: none;
+    z-index: 10;
+  	width: 100%;
+  	background: transparent;
+  	color: #f5f5f5;
+  	opacity: 0;
+  	@include transition(opacity .3s);
+
+    &:focus{
+      outline: none;
+      opacity: 1;
+    	-webkit-transition-delay: 0.3s;
+    	transition-delay: 0.3s;
+    }
+  }
+  .input__label {
+  	display: inline-block;
+  	float: right;
+  	padding: 0;
+  	width: 40%;
+  	color: #6a7989;
+  	font-weight: 300;
+  	font-size: 70.25%;
+    position: relative;
+  	width: 100%;
+  	color: #111;
+  	text-align: left;
+  	-webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  	-webkit-touch-callout: none;
+  	-webkit-user-select: none;
+  	-khtml-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+
+    &::before{
+      content: '';
+    	position: absolute;
+    	bottom: 100%;
+    	left: 0;
+    	width: 100%;
+    	height: 4em;
+    	background: #514a9d; //#333
+      @include transform(perspective(1000px) rotate3d(1, 0, 0, 90deg));
+      @include transform-origin(50% 100%);
+      @include transition(transform .3s);
+    }
+
+    &::after{
+      content: '';
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 3px;
+    	background: #403b7d;
+    	@include transform-origin(50% 100%);
+      @include transition(transform .3s);
+    }
+
+    .input__label-content {
+    	position: relative;
+    	display: block;
+    	padding: 0.5em 0;
+    	width: 100%;
+    }
+  }
+}
+
+.input--filled{
+  .input__field{
+    opacity: 1;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+  }
+}
+
+.input__field:focus + .input__label::before,
+.input--filled .input__label::before {
+	@include transform(perspective(1000px) rotate3d(1, 0, 0, 0deg));
+}
+
+.input__field:focus + .input__label,
+.input--filled .input__label {
+	pointer-events: none;
+}
+
+.input__field:focus + .input__label::after,
+.input--filled .input__label::after {
+	@include transform(perspective(1000px) rotate3d(1, 0, 0, -90deg));
+}
