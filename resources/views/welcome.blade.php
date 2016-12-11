@@ -11,6 +11,7 @@
       </div>
       <div class="row">
         <a href="/register" class="btn btn-primary">Register</a>
+          <a href="/login" class="btn btn-info">Login</a>
       </div>
     </div>
   </div>

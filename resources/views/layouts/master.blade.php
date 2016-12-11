@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>@yield('title')Lazytime</title>
-  <link rel="shortcut icon" type="image" href="/images/favicon.png" />
+  <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 
