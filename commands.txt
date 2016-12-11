@@ -1,0 +1,38 @@
+In order to create anything, you can just use artisan commands, so:
+
+php artisan make:[type] [name]
+
+Where type can be 'model', 'controller', 'migration', 'middleware', and so much more,
+and name is just the name.
+You might need to run this with "sudo" priveleges
+
+Example:
+I want to make a Model and a controller for it. The model will be called "Derp".
+  sudo php artisan make:model Derp
+    ^ This will create a model as app/Derp.php
+
+  sudo php artisan make:controller DerpController
+    ^ This will create the controller as app/Http/Controllers/DerpController.php
+
+For more info, visit (https://laravel.com/docs/5.3/)
+---------------------------------------------------------------
+DATABASE MIGRATIONS
+
+In order to actually store user data we need to create tables for it.
+The command to make a migration is:
+
+php artisan make:migration [name] [--params]
+
+Where name is the name of the migration such as "create_users_table",
+and params is the type of migration [create vs table] (params is optional)
+
+Example:
+I want to create a new table for the existing Model "Derp"
+  sudo php artisan make:migration create_table_for_derp --create=derps
+  ^ Note that derps is plural, since it will store multiple derps
+
+I want to modify the Derp table because I want to add something new
+  sudo php artisan make:migration add_herp_to_derp --table=derps
+  ^ Should be self explanatory
+
+For more info, visit (https://laravel.com/docs/5.3/migrations)
