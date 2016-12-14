@@ -73,13 +73,31 @@ Route::resource('tasks', 'TasksController', [
 
 
 /*Wild Cards*/
-Route::get('list/{id}', [
-  'middleware' => 'auth',
-  'as' => 'viewCampaign',
-  'uses' => 'CampaignsController@view'
-]);
 Route::get('user/{id?}', [
   'middleware' => 'auth',
   'as' => 'viewUser',
   'uses' => 'UsersController@show'
+]);
+
+
+/*Lists*/
+Route::get('list/{id}', [
+  'middleware' => 'auth',
+  'as' => 'getList',
+  'uses' => 'ListsController@get'
+]);
+Route::post('list', [
+  'middleware' => 'auth',
+  'as' => 'createList',
+  'uses' => 'ListsController@post'
+]);
+
+/*Testing*/
+Route::get('jamesgod', [
+  'as' => 'jamesgod',
+  'uses' => 'TestController@jamesgod'
+]);
+Route::get('test_createlist', [
+  'as' => 'test_createlist',
+  'uses' => 'TestController@createList'
 ]);
