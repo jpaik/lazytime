@@ -31,6 +31,7 @@ elixir(function(mix) {
           paths.bootstrap + 'javascripts/bootstrap.js'
         ], 'public/js/library.js', './')
         .scripts([
+          'app.js',
           'script.js'
         ],'public/js/script.js');
 });
