@@ -13,10 +13,7 @@
 
   .panel-heading {
     padding: 10px 0;
-    cursor: pointer;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    cursor: grab;
+    @include cursor-drag;
 
     h2, .h2 {
       margin: 0;
@@ -31,34 +28,41 @@
     padding: 10px 0;
     overflow-y:auto;
   }
+
+  .task{
+    margin: 2px 0;
+    font-size: 1.1em;
+    input{
+      @include scale(1.1);
+    }
+    label{
+      font-weight: 400;
+      margin-left: 5px;
+    }
+  }
 }
 
 .todolist.ui-draggable-dragging, .todolist.is-positioning-post-drag{  //Basically when it's moved/active
   box-shadow: 0 0 15px 2px rgba(0,0,0,.6);
   z-index: 2;
   .panel-heading {
-    cursor: move;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
-    cursor: grabbing;
+    @include cursor-draggable;
   }
 }
 
 .grid-sizer{
-  width: calc((100% / 3) - 15px);
+  width: calc((100% / 3) - 10px);
   @include screen('mobile'){
     width: calc(100% - 15px);
   }
 }
 .gutter-sizer{
-  width: 15px;
+  width: 10px;
 }
 
 .packery-drop-placeholder {
   margin: 15px;
   outline: 3px dashed rgba(255,255,255,.7);
   outline-offset: -6px;
-  /* transition position changing */
-  -webkit-transition: -webkit-transform 0.3s;
-          transition: transform 0.3s;
+  @include transition(transform 0.3s)
 }

@@ -1,5 +1,7 @@
 /*
-Transitions and Transform
+====================================
+Transitions and Transforms
+===================================
 */
 @mixin transition($arges) {
     //Args ex: "all ease .3s"
@@ -52,4 +54,22 @@ Breakpoints
   @else{
     @warn "No breakpoint: `#{$breakpoint}`. ";
   }
+}
+
+/*
+====================================
+Repeated things
+===================================
+*/
+@mixin cursor-drag{
+  cursor: pointer;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+@mixin cursor-draggable{
+  cursor: move;
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
