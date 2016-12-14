@@ -9,6 +9,11 @@ use App\Todolist;
 
 class ListsController extends Controller
 {
+    /*
+    ====================================
+    API functionality goes under here
+    ====================================
+    */
     public function get($id) {
       $user = \Auth::user();
       $list = Todolist::find($id);
@@ -54,4 +59,22 @@ class ListsController extends Controller
         'updated_at' => $list->updated_at
       ]);
     }
+
+    /*
+    ====================================
+    Web Application functionality goes under here
+    ====================================
+    */
+
+    public function updatePosition(Request $request){
+      $data = $request->only('id', 'position');
+      $list = Todolist::find($data->id);
+      $list->position = $data->position;
+      if($list->save()){
+        return response('Success', 200);
+      }
+      return response('Error', 500);
+    }
+
+
 }

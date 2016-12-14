@@ -47,6 +47,13 @@ class UsersController extends Controller
         $data['confirmation_code'] = $confirmation_code;
         $user = User::create($data);
         if($user){
+          //We will create a default list for users, where they can just type in to the top input box and their tasks will appear here.
+          $default_list = ['name' => 'Default List', 'description' => 'The list where uncategorized tasks go to.', 'position' => '0'];
+          $default_list['user_id'] = $user->id;
+          $list = Todolist::create($default_list);
+          $user->default_list_id = $list->id;
+          $user->save();
+
           \Auth::login($user);
           return redirect()->route('send_verification_code');
         }
