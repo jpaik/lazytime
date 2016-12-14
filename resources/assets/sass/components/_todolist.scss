@@ -14,6 +14,8 @@
   .panel-heading {
     padding: 10px 0;
     cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
     cursor: grab;
 
     h2, .h2 {
@@ -36,6 +38,8 @@
   z-index: 2;
   .panel-heading {
     cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
     cursor: grabbing;
   }
 }
