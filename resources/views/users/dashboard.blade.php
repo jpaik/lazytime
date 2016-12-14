@@ -7,7 +7,7 @@
       <div class="gutter-sizer"></div>
       <div class="grid-sizer"></div>
       @for ($i = 1; $i <= 9; $i++)
-        @include('todos.list', ['num' => $i])
+        @include('todos.list', ['list_num' => $i])
       @endfor
     </div>
   </div>
@@ -31,6 +31,11 @@
         cancel: 'input'
       });
       $grid.packery('bindUIDraggableEvents', $todolists);
+      $grid.on( 'dragItemPositioned',
+        function( event, draggedItem ) {
+          console.log('Packery drag item positioned', draggedItem.element );
+        }
+      );
     });
   </script>
 @endsection
