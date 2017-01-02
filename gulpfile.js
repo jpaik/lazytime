@@ -16,7 +16,8 @@ var elixir = require('laravel-elixir');
     'jquery': './node_modules/jquery/dist/',
     'jqueryui': './node_modules/jquery-ui-dist/',
     'packery': './node_modules/packery/dist/',
-    'fa': './node_modules/font-awesome/'
+    'fa': './node_modules/font-awesome/',
+    'swal': './node_modules/sweetalert2/dist/'
 }
 
 elixir(function(mix) {
@@ -24,11 +25,13 @@ elixir(function(mix) {
         .copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts')
         .copy(paths.fa + 'fonts/**', 'public/fonts')
         .copy(paths.jqueryui + 'jquery-ui.min.css', 'public/css')
+        .copy(paths.swal + 'sweetalert2.min.css', 'public/css')
         .scripts([
           paths.jquery + 'jquery.js',
           paths.jqueryui + 'jquery-ui.js',
           paths.packery + 'packery.pkgd.js',
-          paths.bootstrap + 'javascripts/bootstrap.js'
+          paths.bootstrap + 'javascripts/bootstrap.js',
+          paths.swal + 'sweetalert2.js'
         ], 'public/js/library.js', './')
         .scripts([
           'app.js',
