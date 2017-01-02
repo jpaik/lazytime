@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\Todolist;
+use App\Task;
 
 class UsersController extends Controller
 {
@@ -48,7 +50,7 @@ class UsersController extends Controller
         $user = User::create($data);
         if($user){
           //We will create a default list for users, where they can just type in to the top input box and their tasks will appear here.
-          $default_list = ['name' => 'Default List', 'description' => 'The list where uncategorized tasks go to.', 'position' => '0'];
+          $default_list = ['name' => 'Quick Tasks', 'description' => 'The list where uncategorized tasks go to.', 'position' => '0'];
           $default_list['user_id'] = $user->id;
           $list = Todolist::create($default_list);
           $user->default_list_id = $list->id;
@@ -147,8 +149,12 @@ class UsersController extends Controller
     }
 
     public function dashboard(){
-        return view('users.dashboard')
-          ->with(['user'=> \Auth::user()]); //, 'lists'=> List::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get()
+      $todolists = Todolist::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get();
+      foreach($todolists as $list){
+         $tasks[$list->id] = Task::where('list_id', $list->id)->orderBy('state', 'asc')->orderBy('position', 'asc')->get();
+       }
+      return view('users.dashboard')
+        ->with(['user'=> \Auth::user(), 'todolists' => $todolists, 'tasks' => $tasks]);
     }
 
     public function settings(){

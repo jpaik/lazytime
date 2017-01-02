@@ -24,7 +24,7 @@ class ListsController extends Controller
         }
 
         return response()->json([
-          'list_id' => $list->id,
+          'id' => $list->id,
           'name' => $list->name,
           'description' => $list->description,
           'due_date' => $list->due_date,
@@ -46,18 +46,21 @@ class ListsController extends Controller
       $data['user_id'] = $user->id;
       $list = Todolist::create($data);
 
-      return response()->json([
-        'list_id' => $list->id,
-        'name' => $list->name,
-        'description' => $list->description,
-        'due_date' => $list->due_date,
-        'position' => $list->position,
-        'is_completed' => $list->is_completed,
-        'priority' => $list->priority,
-        'color' => $list->color,
-        'created_at' => $list->created_at,
-        'updated_at' => $list->updated_at
-      ]);
+      if($list){
+        return response()->json([
+          'id' => $list->id,
+          'name' => $list->name,
+          'description' => $list->description,
+          'due_date' => $list->due_date,
+          'position' => $list->position,
+          'is_completed' => $list->is_completed,
+          'priority' => $list->priority,
+          'color' => $list->color,
+          'created_at' => $list->created_at,
+          'updated_at' => $list->updated_at
+        ]);
+      }
+      return response('Error', 500);
     }
 
     /*
