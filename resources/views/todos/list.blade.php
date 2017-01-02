@@ -1,14 +1,26 @@
-<div class="panel panel-default todolist" data-id="{{$list_num}}">
+<div class="panel panel-default todolist init" data-id="{{$list->id}}">
   <div class="panel-heading">
     <h2 class="text-center">
-      {{--$list->name--}} <span class="title">Todo List {{$list_num}}</span>
+      <span data-toggle="tooltip" title="{{$list->description}}" class="title">{{$list->name}}</span>
     </h2>
   </div>
   <div class="panel-body">
     <div class="row">
-      @for ($i = 1; $i < rand(6,10); $i++)
-        @include('todos.task', ['task_num' => $i])
-      @endfor
+      <div class="col-xs-12">
+        {{ Form::open(['route'=> 'createTask', 'data-id'=>$list->id, 'class'=>'todolist_form'])}}
+        <span class="input">
+          {{ Form::text('description', null, ['class'=>'input__field', 'id'=>'new_task--'.$list->id, 'data-list-id'=> $list->id, 'placeholder'=>"Add task...", 'autocomplete'=>'off']) }}
+          <label class="input__label" for="new_task--{{$list->id}}">
+            <span class="input__label-content">Add a new task</span>
+          </label>
+        </span>
+        {{ Form::close() }}
+      </div>
+    </div>
+    <div class="row tasks_row">
+      @foreach ($tasks[$list->id] as $task)
+        @include('todos.task', ['tasks' => $task])
+      @endforeach
     </div>
   </div>
 </div>
