@@ -12,5 +12,5 @@ class Task extends Model
 
     public static $create_validation_rules = [
       'description' => 'required'
-    ]
+    ];
 }

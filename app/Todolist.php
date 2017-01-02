@@ -11,6 +11,6 @@ class Todolist extends Model
   ];
 
   public static $create_validation_rules = [
-    'name' => 'required'
+    'name' => 'required|max:255 '
   ];
 }
