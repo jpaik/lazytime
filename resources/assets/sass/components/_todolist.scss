@@ -4,11 +4,18 @@
   width: calc((100% / 3) - 30px);
   overflow: hidden;
   float: left;
+  opacity: 1;
   @include transition(box-shadow ease .3s)
+  @include transition(opacity ease .5s)
 
   @include screen('mobile'){
     margin: 0 15px;
     width: calc(100% - 30px);
+  }
+
+  &.init{
+    opacity: 0;
+    @include transition(opacity ease .5s)
   }
 
   .panel-heading {
@@ -38,6 +45,11 @@
     label{
       font-weight: 400;
       margin-left: 5px;
+    }
+  }
+  .task.checked{
+    label{
+      text-decoration: line-through;
     }
   }
 }

@@ -5,4 +5,24 @@
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 2em 0 0;
+
+  .todolist-row{
+    margin-top:150px;
+  }
+}
+
+#quick-task{
+  color: #fff;
+  .input__label{
+    color: #fff;
+    font-size: 100%;
+  }
+  .input__label::before{
+    height: 3em;
+  }
+}
+
+#new-todolist{
+  height: 2.5em;
+  font-size: 1.5em;
 }
