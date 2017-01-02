@@ -67,9 +67,6 @@ Route::resource('users', 'UsersController', [
 Route::resource('lists', 'ListsController', [
   'only' => ['create', 'store', 'update', 'destroy']
 ]);
-Route::resource('tasks', 'TasksController', [
-  'only' => ['create', 'store', 'update', 'destroy']
-]);
 
 
 /*Wild Cards*/
@@ -93,7 +90,21 @@ Route::post('list', [
 ]);
 
 /*Tasks*/
-
+Route::get('task/{id}', [
+  'middleware' => 'auth',
+  'as' => 'getTask',
+  'uses' => 'TasksController@get'
+]);
+Route::post('task', [
+  'middleware' => 'auth',
+  'as' => 'createTask',
+  'uses' => 'TasksController@post'
+]);
+Route::post('task/update', [
+  'middleware' => 'auth',
+  'as' => 'updateTask',
+  'uses' => 'TasksController@update'
+]);
 
 /*Testing*/
 Route::get('jamesgod', [
