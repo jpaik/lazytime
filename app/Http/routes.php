@@ -44,6 +44,12 @@ Route::get('logout', [
   'uses' => 'AuthController@logout'
 ]);
 
+/*Update Todo Panel Positions*/
+Route::post('updatePosition', [
+  'middleware' => 'auth',
+  'as' => 'updatePosition',
+  'uses' => 'UsersController@updatePosition'
+]);
 
 /*Confirm Email*/
 Route::get('verify', [

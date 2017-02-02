@@ -32,8 +32,7 @@ $(function() {
           } else {
             resolve([
               $('#new-todolist-name').val(),
-              $('#new-todolist-description').val(),
-              $('#new-todolist-form input[name="_token"]').val()
+              $('#new-todolist-description').val()
             ]);
           }
         })
@@ -47,7 +46,7 @@ $(function() {
           name: result[0],
           position: 0,
           description: result[1],
-          _token: result[2]
+          _token: $('#default_task_form input[name="_token"]').val()
         },
         success: function(data) {
           console.log(data);
@@ -86,7 +85,7 @@ $(function() {
   });
 
   /*Create List Task*/
-  $('.todolist_form').submit(function(e) {
+  $('.todolist-row').on('submit', '.todolist_form', function(e) {
     e.preventDefault();
     var listId = parseInt($(this).attr('data-id'));
     if ($('#new_task--' + listId).val() === "") {
@@ -94,7 +93,7 @@ $(function() {
       return;
     } else {
       var task = $('#new_task--' + listId).val();
-      var token = $(this).find('input[name="_token"]').val();
+      var token = $('#default_task_form input[name="_token"]').val();
       $.ajax({
         url: "/task",
         type: 'POST',
@@ -114,9 +113,9 @@ $(function() {
   });
 
   /*Check or Uncheck Task*/
-  $('.todolist .task input[type="checkbox"]').on('change', function() {
+  $('.todolist-row').on('change','.todolist .task input[type="checkbox"]', function() {
     var taskId = parseInt($(this).parent().attr('data-id'));
-    var token = $(this).siblings('input[name="_token"]').val();
+    var token = $('#default_task_form input[name="_token"]').val();
     var state = $(this).is(':checked') ? 1 : 0;
     $.ajax({
       url: "/task/update",
@@ -128,9 +127,10 @@ $(function() {
       },
       success: function(data) {
         if (data.state == 0) {
-          $('.task[data-id="' + data.id + '"]').removeClass('checked');
+          var task = $('.task[data-id="' + data.id + '"]').detach();
+          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row .task:not(".checked")').last().after($(task).removeClass('checked'));
         } else if (data.state == 1) {
-          $('.task[data-id="' + data.id + '"]').addClass('checked').appendTo('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row');
+          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row .task:not(".checked")').last().after($('.task[data-id="' + data.id + '"]').addClass('checked'));
         }
       }
     });
@@ -147,7 +147,41 @@ function getHTMLtask(data) {
 }
 
 function createTodoList(data) {
-  
+  var html = `
+  <div class="panel panel-default todolist" data-id="${data.id}" style="position:absolute;">
+    <div class="panel-heading">
+      <h2 class="text-center">
+        <span data-toggle="tooltip" title="${data.description}" class="title">${data.name}</span>
+      </h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12">
+        <form method="POST" action="/task" accept-charset="UTF-8" data-id="${data.id}" class="todolist_form">
+          <span class="input">
+            <input class="input__field" id="new_task--${data.id}" data-list-id="${data.id}" placeholder="Add task..." autocomplete="off" name="description" type="text">
+            <label class="input__label" for="new_task--${data.id}">
+              <span class="input__label-content">Add a new task</span>
+            </label>
+          </span>
+        </form>
+        </div>
+      </div>
+      <div class="row tasks_row">
+      </div>
+    </div>
+  </div>
+  `;
+
+  $('.todolist-row').append(html);
+  $('.todolist[data-id="'+data.id+'"]').draggable({
+    handle: '.panel-heading',
+    containment: '#dashboard',
+    cursor: 'grabbing',
+    cancel: 'input'
+  })
+  $('.todolist-row').packery('appended', $('.todolist[data-id="'+data.id+'"]'));
+  $('.todolist-row').packery('bindUIDraggableEvents', $('.todolist[data-id="'+data.id+'"]'));
   $('.todolist-row').trigger('refresh');
 }
 
@@ -193,8 +227,10 @@ Packery.prototype.initShiftLayout = function(positions, cls, attr) {
     var selector = '.' + cls + '[' + attr + '="' + itemPosition.attr + '"]'
     var itemElem = this.element.querySelector(selector);
     var item = this.getItem(itemElem);
-    item.rect.x = itemPosition.x * this.packer.width;
-    return item;
+    if(item){
+      item.rect.x = itemPosition.x * this.packer.width;
+      return item;
+    }
   }, this);
   // filter out any items that no longer exist
   this.items = this.items.filter(function(item) {

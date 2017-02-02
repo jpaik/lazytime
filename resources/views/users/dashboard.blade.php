@@ -54,7 +54,8 @@
         cancel: 'input'
       });
       // get saved dragged positions
-      var initPositions = localStorage.getItem('dragPositions');
+      var savedPosition = '{{$user->list_positions}}';
+      var initPositions = savedPosition != "" ? savedPosition.substring(savedPosition.indexOf('[') - 1, savedPosition.length - 8).replace(/&quot;/g, '\\"').replace(/\\/g,"").replace(/;/g,"") : localStorage.getItem('dragPositions');
       // init layout with saved positions
       $grid.packery( 'initShiftLayout', initPositions, 'todolist', 'data-id' );
 
@@ -63,10 +64,17 @@
         function( event, draggedItem ) {
           //console.log('Packery drag item positioned', draggedItem.element );
           var positions = $grid.packery( 'getShiftPositions', 'data-id' );
-          localStorage.setItem( 'dragPositions', JSON.stringify( positions ) );
+          localStorage.setItem( 'dragPositions', JSON.stringify( positions ));
+          $.ajax({
+            type: "POST",
+            url: '/updatePosition',
+            data: {positions: JSON.stringify(positions), _token: $('#default_task_form input[name="_token"]').val()},
+            success: function() {}
+          });
         }
       );
 
+      $('#quick-task__input').focus();
       $('.todolist').removeClass('init');
 
     });

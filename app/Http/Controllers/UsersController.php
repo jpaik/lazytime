@@ -138,7 +138,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the user from database.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -149,10 +149,17 @@ class UsersController extends Controller
     }
 
     public function dashboard(){
-      $todolists = Todolist::where('user_id', \Auth::user()->id)->orderBy('position', 'asc')->get();
+      $todolists = Todolist::where('user_id', \Auth::user()->id)
+                            ->where('is_completed', 0)
+                            ->orderBy('position', 'asc')
+                            ->get();
+      $tasks = [];
       foreach($todolists as $list){
-         $tasks[$list->id] = Task::where('list_id', $list->id)->orderBy('state', 'asc')->orderBy('position', 'asc')->get();
-       }
+         $tasks[$list->id] = Task::where('list_id', $list->id)
+                                  ->orderBy('state', 'asc')
+                                  ->orderBy('updated_at', 'desc')
+                                  ->get();
+      }
       return view('users.dashboard')
         ->with(['user'=> \Auth::user(), 'todolists' => $todolists, 'tasks' => $tasks]);
     }
@@ -160,5 +167,22 @@ class UsersController extends Controller
     public function settings(){
      return view('users.settings')
        ->with(['user'=> \Auth::user()]);
+   }
+
+   /**
+    * Update the Position of each task
+    *
+    * @param  Request request (get array positions)
+    * @return \Illuminate\Http\Response
+    */
+   public function updatePosition(Request $request)
+   {
+       $user = \Auth::user();
+       $user->list_positions = serialize($request->only('positions'));
+       if($user->save()){
+         return response('Success', 200);
+       }else{
+         return response('Error', 500);
+       }
    }
 }
