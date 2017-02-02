@@ -1,6 +1,9 @@
 <div class="panel panel-default todolist init" data-id="{{$list->id}}">
   <div class="panel-heading">
     <h2 class="text-center">
+      <span class="pull-right buttons">
+        <i title="Mark as completed" class="fa fa-check-square markCompleted"></i>
+      </span>
       <span data-toggle="tooltip" title="{{$list->description}}" class="title">{{$list->name}}</span>
     </h2>
   </div>

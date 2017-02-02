@@ -49,11 +49,18 @@ $(function() {
           _token: $('#default_task_form input[name="_token"]').val()
         },
         success: function(data) {
-          console.log(data);
+          //console.log(data);
           createTodoList(data);
         }
       });
     }).catch(swal.noop);
+
+    $('.createTodoSwal').on('keypress', function(e){
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+      if(keycode == 13){
+        $('.createTodoSwal .swal2-confirm').click();
+      }
+    });
   });
 
   /*Create default task*/
@@ -77,7 +84,7 @@ $(function() {
         },
         success: function(data) {
           $("#quick-task__input").val('');
-          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row').append(getHTMLtask(data));
+          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row').prepend(getHTMLtask(data));
           $('.todolist-row').trigger('refresh');
         }
       });
@@ -105,7 +112,7 @@ $(function() {
         },
         success: function(data) {
           $('#new_task--' + listId).val('');
-          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row').append(getHTMLtask(data));
+          $('.todolist[data-id="' + data.list_id + '"] .panel-body > .tasks_row').prepend(getHTMLtask(data));
           $('.todolist-row').trigger('refresh');
         }
       });
@@ -136,7 +143,40 @@ $(function() {
     });
   });
 
-});
+  /*Archive and Mark done Todolist*/
+  //markCompleted
+  $('.todolist-row').on('click', '.todolist i.markCompleted', function(){
+    var listId = parseInt($(this).closest('.todolist').data('id'));
+
+    swal({
+      title: 'Mark Todolist as completed',
+      html: 'Do you want to mark this todo list as completed and archive it?',
+      showCancelButton: true,
+      confirmButtonText: 'Archive',
+      confirmButtonClass: 'btn btn-danger',
+      showLoaderOnConfirm: true
+    }).then(function() {
+      $.ajax({
+        url: "/list/archive",
+        type: 'POST',
+        data: {
+          id: listId,
+          _token: $('#default_task_form input[name="_token"]').val()
+        },
+        success: function(data) {
+          if(data.success){
+            $('.todolist[data-id="' + data.id + '"]').remove();
+            $('.todolist-row').trigger('refresh');
+          }
+        }
+      });
+    }).catch(swal.noop);
+
+
+  });
+
+
+}); //END function closure
 
 function getHTMLtask(data) {
   return `
@@ -151,6 +191,9 @@ function createTodoList(data) {
   <div class="panel panel-default todolist" data-id="${data.id}" style="position:absolute;">
     <div class="panel-heading">
       <h2 class="text-center">
+        <span class="pull-right buttons">
+          <i title="Mark as completed" class="fa fa-check-square markCompleted"></i>
+        </span>
         <span data-toggle="tooltip" title="${data.description}" class="title">${data.name}</span>
       </h2>
     </div>
@@ -185,7 +228,7 @@ function createTodoList(data) {
   $('.todolist-row').trigger('refresh');
 }
 
-function deleteTodoList(data) {
+function archiveTodoList(data) {
 
 }
 

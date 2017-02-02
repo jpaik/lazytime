@@ -29,6 +29,30 @@
     .title { //The title/name of the todo list
       padding: 0 20px;
     }
+
+    .buttons{
+      opacity: 0;
+      margin-right: 10px;
+      position: absolute;
+      right:0;
+      @include transition(opacity ease-out .3s)
+    }
+    .buttons i{
+      padding-left: 10px;
+      @include transition(color ease-out .3s)
+      &:hover{
+        color: $brand-primary;
+        cursor: pointer;
+        @include transition(color ease-out .3s)
+      }
+    }
+
+    &:hover{
+      .buttons{
+        opacity: 1;
+        @include transition(opacity ease-out .3s)
+      }
+    }
   }
 
   .panel-body{

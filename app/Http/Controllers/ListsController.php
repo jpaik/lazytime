@@ -63,6 +63,33 @@ class ListsController extends Controller
       return response('Error', 500);
     }
 
+    public function archive(Request $request){
+      $user = \Auth::user();
+      $list = Todolist::find( $request['id'] );
+
+      if ($list != null) {
+        if ($user->id != $list->user_id) {
+          return response('Unauthorized', 401);
+        }
+        if($user->default_list_id == $list->id){
+            return response('Unauthorized', 401);
+        }
+
+        $list->is_completed = true;
+        if($list->save()){
+          return response()->json([
+            'success' => true,
+            'id' => $list->id
+          ]);
+        }else{
+          return response('Error', 500);
+        }
+
+      } else {
+        return response('Not found', 404);
+      }
+    }
+
     /*
     ====================================
     Web Application functionality goes under here

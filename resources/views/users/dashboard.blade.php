@@ -51,7 +51,7 @@
         handle: '.panel-heading',
         containment: '#dashboard',
         cursor: 'grabbing',
-        cancel: 'input'
+        cancel: 'input, .buttons'
       });
       // get saved dragged positions
       var savedPosition = '{{$user->list_positions}}';
@@ -76,6 +76,8 @@
 
       $('#quick-task__input').focus();
       $('.todolist').removeClass('init');
+
+      $('.todolist[data-id="{{$user->default_list_id}}"] .markCompleted').remove();
 
     });
 

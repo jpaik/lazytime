@@ -150,7 +150,7 @@ class UsersController extends Controller
 
     public function dashboard(){
       $todolists = Todolist::where('user_id', \Auth::user()->id)
-                            ->where('is_completed', 0)
+                            ->where('is_completed', false)
                             ->orderBy('position', 'asc')
                             ->get();
       $tasks = [];

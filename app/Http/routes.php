@@ -94,6 +94,11 @@ Route::post('list', [
   'as' => 'createList',
   'uses' => 'ListsController@post'
 ]);
+Route::post('list/archive', [
+  'middleware' => 'auth',
+  'as' => 'archiveList',
+  'uses' => 'ListsController@archive'
+]);
 
 /*Tasks*/
 Route::get('task/{id}', [
