@@ -29,7 +29,7 @@
         </div>
         <div class="col-xs-12">
           {{ Form::checkbox('remember_me', 'true', false, ['id' => 'remember_me']) }}
-          {{ Form::label('remember_me', 'Remember Me', ['style'=>'font-weight:300;margin-top:20px;']) }}
+          {{ Form::label('remember_me', 'Remember Me') }}
         </div>
       </div>
       <div class="text-center">

@@ -3,13 +3,14 @@
   min-height: 100px;
   width: calc((100% / 3) - 30px);
   overflow: hidden;
+  line-height: 1.2;
   float: left;
   opacity: 1;
   @include transition(box-shadow ease .3s)
   @include transition(opacity ease .5s)
 
   @include screen('mobile'){
-    margin: 0 15px;
+    margin: 10px 15px;
     width: calc(100% - 30px);
   }
 

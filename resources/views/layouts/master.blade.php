@@ -9,6 +9,7 @@
   <title>@yield('title')Lazytime</title>
   <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
   <link href="css/sweetalert2.min.css" rel="stylesheet" type="text/css">
+  <link href="css/animate.min.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 

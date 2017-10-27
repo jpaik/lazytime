@@ -22,7 +22,10 @@
   	color: #f5f5f5;
   	opacity: 0;
   	@include transition(opacity .3s);
-
+		@include screen('mobile'){
+      padding: .6em;
+			font-size: $font-size-base;
+    }
     &:focus{
       outline: none;
       opacity: 1;
@@ -62,6 +65,9 @@
       @include transform(perspective(1000px) rotate3d(1, 0, 0, 90deg));
       @include transform-origin(50% 100%);
       @include transition(transform .3s);
+			@include screen('mobile'){
+	      height: 3em;
+	    }
     }
 
     &::after{
@@ -106,4 +112,8 @@
 .input__field:focus + .input__label::after,
 .input--filled .input__label::after {
 	@include transform(perspective(1000px) rotate3d(1, 0, 0, -90deg));
+}
+
+label{
+	font-weight: 300;
 }

@@ -149,7 +149,7 @@ $(function() {
     var listId = parseInt($(this).closest('.todolist').data('id'));
 
     swal({
-      title: 'Mark Todolist as completed',
+      title: 'Mark this list as completed',
       html: 'Do you want to mark this todo list as completed and archive it?',
       showCancelButton: true,
       confirmButtonText: 'Archive',
@@ -239,6 +239,9 @@ Packery.prototype.getShiftPositions = function(attrName) {
   attrName = attrName || 'id';
   var _this = this;
   return this.items.map(function(item) {
+    console.log(item);
+    console.log("Item "+$(item.element).data('id')+" rect: " +item.rect.x);
+    console.log("Item "+$(item.element).data('id')+" Width: " + _this.packer.width);
     return {
       attr: item.element.getAttribute(attrName),
       x: item.rect.x / _this.packer.width

@@ -1,3 +1,12 @@
+# LazyTime
+
+### Check out the live website here: [https://lazyti.me](https://lazyti.me)
+
+Lazytime is a simple webapp for todo lists for people who want to organize their todos as sticky notes.
+It's a small project that I made to learn laravel, other frameworks, and much more.
+
+---
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)

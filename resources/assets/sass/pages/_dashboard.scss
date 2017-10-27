@@ -16,6 +16,10 @@
   .input__label{
     color: #fff;
     font-size: 100%;
+
+    @include screen('mobile'){
+      font-size: 90%;
+    }
   }
   .input__label::before{
     height: 3em;
@@ -25,4 +29,9 @@
 #new-todolist{
   height: 2.5em;
   font-size: 1.5em;
+
+  @include screen('mobile'){
+    height: 2.5em;
+    font-size: 1em;
+  }
 }

@@ -4,6 +4,9 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 a{
   outline: none;
@@ -38,6 +41,10 @@ a{
   resize: both;
   overflow:auto;
   background: radial-gradient(circle at bottom right, #fff,#24C6DC 10%, #514A9D 90%);
+}
+
+.alert{
+  margin-bottom: 5px;
 }
 
 .inverse-link, .inverse{
